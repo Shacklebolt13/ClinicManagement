@@ -9,8 +9,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="{% url 'signin' %}">Visitor/Patient</a>
-          <a class="nav-link" href="{% url 'psign' %}">Practitioner</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'signin' %}">Signin</a>
+          <a class="nav-link" href="{% url 'signup' %}">Signup</a>
           <a class="nav-link" href="{% url 'price' %}">Pricing</a>
           <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="false">SuperAdmin</a>
         </div>
@@ -23,17 +23,37 @@
   <center>
   <div class="card" style="margin-top: 15%;width: 20%;background-color: rgba(0, 0, 0, 0.1);"> 
     <div class="card-body">   
-      <form action='signin' method="POST">    
+      <form action='signin' method="POST"> 
+      {% csrf_token %}
+
+      <select class="form-select my-3" name="type" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="p">Practitioner</option>
+        <option value="2">Visitor</option>
+      </select>
+
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">@</span>
           <input type="text" class="form-control"  name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
+
         <div class="input-group mb-3">
-          <input type="text" name="password" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-          <span class="input-group-text" id="basic-addon2"><i class="bi bi-eye"></i></span>
+          <input type="text" name="password" id="Pass" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
+          <span id="basic-addon2" class="input-group-text" onclick="
+                var eye=document.getElementById('shPass');
+                eye.classList.toggle('bi-eye-slash-fill');
+                eye.classList.toggle('bi-eye-fill');
+            
+                var pass=document.getElementById('Pass');
+                if(pass.type=='text')
+                    pass.type='password';
+                else
+                    pass.type='text';
+                ">
+            <i id="shPass" class="bi bi-eye-slash-fill"></i></span>
         </div>
-        <button type="button" class="btn btn-secondary">Submit</button>
+        <input type="submit" class="btn btn-secondary"></input>
       </form> 
       
     </div>
