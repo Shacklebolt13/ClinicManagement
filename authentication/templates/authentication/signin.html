@@ -26,15 +26,9 @@
       <form action='signin' method="POST"> 
       {% csrf_token %}
 
-      <select class="form-select my-3" name="type" aria-label="Default select example">
-        <option selected>Open this select menu</option>
-        <option value="p">Practitioner</option>
-        <option value="2">Visitor</option>
-      </select>
-
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">@</span>
-          <input type="text" class="form-control"  name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+          <input type="text" class="form-control"  name="email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
         </div>
 
 
