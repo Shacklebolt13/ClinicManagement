@@ -25,7 +25,9 @@
     <div class="card-body">   
       <form action='signin' method="POST"> 
       {% csrf_token %}
-
+        <div style="color: red;">
+          {{error}}
+        </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">@</span>
           <input type="text" class="form-control"  name="email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">

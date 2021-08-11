@@ -1,23 +1,32 @@
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.http import HttpRequest
+from django.contrib.auth import authenticate
 from . import models
 from datetime import date, datetime
 # Create your views here.
+
+
+def signout(request :HttpRequest):
+    resp=redirect("home")
+    resp.delete_cookie('user')
+    return resp
 
 def signin(request :HttpRequest):
     params={}
     if('user' in request.COOKIES):
         return redirect('home')
-    if(request.method.upper!='POST'):
+
+    if(request.method.upper()!='POST'):
+        print('no post')
         return render(request,'authentication/signin.html',params)
-        
+
     email=request.POST.get('email',False)
     password=request.POST.get('password',False)
 
-    user=User.objects.filter(username=email,password=password)
-    if(len(user)==1):
-        user=user[0]
+    user=authenticate(username=email,password=password)
+    print(user)
+    if(user is not None):
         resp=redirect('home')
         resp.set_cookie('user',user.id)
         return resp

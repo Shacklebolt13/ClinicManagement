@@ -12,7 +12,10 @@ class BankAccount(models.Model):
     ifsc=models.TextField(blank=True)
 
     def __str__(self) -> str:
-        return f"{self.practitioner.creds.first_name} {self.practitioner.creds.last_name} ({self.practitioner.creds.username}) 's Bank "
+        try:
+            return f"{self.practitioner.creds.first_name} {self.practitioner.creds.last_name} ({self.practitioner.creds.username}) 's Bank "
+        except Exception:
+            return "someone's Bank"
 
 
 
@@ -21,8 +24,10 @@ class Slot(models.Model):
     to=models.TimeField(blank=True)
 
     def __str__(self) -> str:
-        return f"{self.practitioner.creds.first_name} {self.practitioner.creds.last_name} ({self.practitioner.creds.username}) 's SLOT"
-
+        try:
+            return f"{self.practitioner.creds.first_name} {self.practitioner.creds.last_name} ({self.practitioner.creds.username}) 's SLOT"
+        except Exception:
+            return "someone's Slot"
 
 
 
@@ -77,4 +82,7 @@ class Address(models.Model):
     
 
     def __str__(self) -> str:
-        return f"{self.vis.creds.first_name} {self.vis.creds.last_name} ({self.vis.creds.username}) 's Address "
+        try:
+            return f"{self.vis.creds.first_name} {self.vis.creds.last_name} ({self.vis.creds.username}) 's Address "
+        except Exception:
+            return "someone's Address"
