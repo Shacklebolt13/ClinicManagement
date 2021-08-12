@@ -9,13 +9,13 @@ class CredSerializer(serializers.ModelSerializer):
 class PracSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Practitioner
-        fields = "__all__"
+        fields = ['dp','duration_in_mins','price']
 
 
 class VisSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Visitor
-        fields = "__all__"
+        fields = ["nationality","gender","dob","is_verified",]
 
 
 class BookSerializer(serializers.ModelSerializer):

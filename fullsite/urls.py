@@ -1,6 +1,6 @@
 from django.urls import path
 from django.urls.conf import include
-from . import views
+from . import views,apiviews
 
 
 urlpatterns = [
@@ -9,4 +9,5 @@ urlpatterns = [
     path('appointments',views.seeApps,name='appis'),
     path('pay',views.pay,name='pay'),
     path('paydone',views.paydone,name='paydone'),
+    path('appois',apiviews.Appointment.as_view()),
 ]
