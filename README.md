@@ -5,7 +5,7 @@ Hi, Kindly proceed with the following instructions to install this project.
 # Download
 
 >git clone [https://github.com/Shacklebolt13/ClinicManagement](https://github.com/Shacklebolt13/ClinicManagement)
->cd ClinicManagement
+>cd ClinicManagement <br>
 
 # Create a Virtual Env.
 
