@@ -1,5 +1,6 @@
 {% include 'authentication/default.html' %}
 
+
 {% block midPart %}
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -22,31 +23,14 @@
   <center>
   <div class="card" style="margin-top: 15%;width: 20%;background-color: rgba(0, 0, 0, 0.1);"> 
     <div class="card-body">   
-      <form action='signin' method="POST"> 
+      <form action='{% url 'confirm'%}' method="POST"> 
       {% csrf_token %}
         <div style="color: red;">
           {{error}}
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">@</span>
-          <input type="text" class="form-control"  name="email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
-        </div>
-
-
-        <div class="input-group mb-3">
-          <input type="password" name="password" id="Pass" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
-          <span id="basic-addon2" class="input-group-text" onclick="
-                var eye=document.getElementById('shPass');
-                eye.classList.toggle('bi-eye-slash-fill');
-                eye.classList.toggle('bi-eye-fill');
-            
-                var pass=document.getElementById('Pass');
-                if(pass.type=='text')
-                    pass.type='password';
-                else
-                    pass.type='text';
-                ">
-            <i id="shPass" class="bi bi-eye-slash-fill"></i></span>
+          <input type="number" class="form-control"  name="otp" placeholder="otp" aria-label="otp" aria-describedby="basic-addon1">
         </div>
         <input type="submit" class="btn btn-secondary"></input>
       </form> 
@@ -56,5 +40,4 @@
 <center>
 
 {% endblock midPart %}
-
 

@@ -63,11 +63,11 @@ class Visitor(models.Model):
 
 
 
-class Booking():
+class Booking(models.Model):
     practitioner=models.ManyToManyField(Practitioner)
-    visitor=models.OneToOneField(Visitor,on_delete=models.CASCADE)
-    timing=models.OneToOneField(Slot,on_delete=models.CASCADE)
+    visitor=models.ManyToManyField(Visitor)
     date=models.DateField()
+    paid=models.BooleanField(default=False)
     
 
 

@@ -4,6 +4,8 @@ from django.http import HttpRequest
 from django.contrib.auth import authenticate
 from . import models
 from datetime import date, datetime
+from ClinicManagement import helpers
+import random
 # Create your views here.
 
 
@@ -11,6 +13,34 @@ def signout(request :HttpRequest):
     resp=redirect("home")
     resp.delete_cookie('user')
     return resp
+
+
+def confirm(request :HttpRequest):
+    params={}
+    user: models.Visitor
+    user=request.COOKIES.get('user',False)
+    user=models.Visitor.objects.filter(creds_id=int(user))[0]
+
+    if(request.method.upper()!='POST'):
+        if(not user.is_verified):
+            user.expectedOTP=f"{random.randint(10000,99999)}"
+            params['error']=user.expectedOTP
+            user.save()
+            helpers.sendotp(user.creds.email,user.expectedOTP)
+        else:
+            params['error']="already verified"
+        return render(request,'authentication/confirm.html',params)
+    
+    otp=request.POST.get('otp',False)
+    print(user.expectedOTP,otp)
+    if(user.expectedOTP==otp):
+        user.is_verified=True
+        user.save()
+        return redirect('home')
+    params['error']=user.expectedOTP
+    return render(request,'authentication/confirm.html',params)
+
+
 
 def signin(request :HttpRequest):
     params={}

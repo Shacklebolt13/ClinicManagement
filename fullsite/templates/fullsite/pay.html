@@ -1,0 +1,23 @@
+{% include 'fullsite/default.html' %}
+
+{% block title %}<title>Payment Gateway</title>{% endblock title %}
+
+{% block midPart %}
+<center>
+  <div class="card" style="margin-top: 15%;width: 20%;background-color: rgba(0, 0, 0, 0.1);"> 
+    <div class="card-body">   
+      <form action={% url 'paydone' %} method="POST"> 
+      {% csrf_token %}
+      <input type="hidden" name="docid" value="{}">
+        <div style="color: red;">
+          The booking id is: {{bookId}}
+        </div>
+        
+        <input type="hidden" name="bookid" value="{{bookId}}">
+        <button type="submit" class="btn btn-secondary">Dummy Complete Payment</button>
+      </form> 
+      
+    </div>
+  </div>
+<center>
+{% endblock midPart %}

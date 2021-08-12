@@ -1,16 +1,18 @@
 {% include 'fullsite/default.html' %}
 
+{% block title %}<title>Book a Doctor</title>{% endblock title %}
+
 {% block midPart %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">MyClinic</a>
+    <a class="navbar-brand" href="{% url 'home' %}">MyClinic</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'site'%}">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{%url 'signout'%}">Sign out</a>
@@ -26,52 +28,56 @@
 </nav>
 
 <center>
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="background: rgba(0, 0, 0, 0.6);">
-    
-    {%for prac in pracs|slice:"0:1"%}
-      <div class="carousel-item active">
-        <div class="card" style="width: 40rem;height:90%">
-            <img src="{{prac.img}}" class="card-img-top" >
-            <div class="card-body">
-              <h5 class="card-title">{{prac.name}}</h5>
-              <p class="card-text"> Charges {{prac.price}} for {{prac.duration}} mins. Is available during {{prac.tslotf}} - {{prac.tslott}}</p>
-              <form action="{%url 'book'%}" method="POST">
-                  {%csrf_token%}
-                <input type="hidden" name="docid" value="{{prac.id}}">
-                <button type="submit" class="btn btn-primary">Book</button>
-              </form>
+<div class="container-fluid mt-auto" >    
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+      {%for prac in pracs|slice:"0:1"%}
+        <div class="carousel-item active">
+          <div class="card" style="width: 40rem;height:90%">
+              <img src="{{prac.img}}" class="card-img-top" >
+              <div class="card-body">
+                <h5 class="card-title">{{prac.name}}</h5>
+                <p class="card-text"> Charges {{prac.price}} for {{prac.duration}} mins. Is available during {{prac.tslotf}} - {{prac.tslott}}</p>
+                <form action="{%url 'book'%}" method="POST">
+                    {%csrf_token%}
+                  <input type="hidden" name="docid" value="{{prac.id}}">
+                  <button type="submit" class="btn btn-primary">Book</button>
+                </form>
+              </div>
             </div>
-          </div>
-      </div>
-    {%endfor%}
+        </div>
+      {%endfor%}
 
-    {%for prac in pracs|slice:"1:"%}
-      <div class="carousel-item">
-        <div class="card" style="width: 40rem;height:90%">
-            <img src="{{prac.img}}" class="card-img-top" >
-            <div class="card-body">
-              <h5 class="card-title">{{prac.name}}</h5>
-              <p class="card-text"> Charges {{prac.price}} for {{prac.duration}} mins. Is available during {{prac.tslotf}} - {{prac.tslott}}</p>
-              <form action="{%url 'book'%}" method="POST">
-                {%csrf_token%}
-                <input type="hidden" name="docid" value="{{prac.id}}"></input>
-                <input type="submit" class="btn btn-primary">Book</input>
-              </form>
+      {%for prac in pracs|slice:"1:"%}
+        <div class="carousel-item">
+          <div class="card" style="width: 40rem;height:90%">
+              <img src="{{prac.img}}" class="card-img-top" >
+              <div class="card-body">
+                <h5 class="card-title">{{prac.name}}</h5>
+                <p class="card-text"> Charges {{prac.price}} for {{prac.duration}} mins. Is available during {{prac.tslotf}} - {{prac.tslott}}</p>
+                <form action="{%url 'book'%}" method="POST">
+                  {%csrf_token%}
+                  <input type="hidden" name="docid" value="{{prac.id}}"></input>
+                  <button type="submit" class="btn btn-primary">Book</button>
+                </form>
+              </div>
             </div>
-          </div>
-      </div>
-    {%endfor%}
-</div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+        </div>
+      {%endfor%}
+      
   </div>
 
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+
+    </div>
+</div>
 </center>
  
 {% endblock midPart %}
