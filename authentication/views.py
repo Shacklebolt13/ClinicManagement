@@ -95,14 +95,3 @@ def signup(request: HttpRequest):
     resp.set_cookie(key='user',value=vis.creds.id)
 
     return resp
-
-        
-
-def pracSignin(request: HttpRequest):
-    params={}
-    return render(request,'authentication/pracSignin.html',params)
-
-
-def price(request: HttpRequest):
-    params={}
-    return render(request,'authentication/price.html',params)

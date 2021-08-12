@@ -1,11 +1,16 @@
 from rest_framework import serializers
 from . import models
 
+class CredSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= models.User
+        fields=['first_name','last_name','email']
 
 class PracSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Practitioner
         fields = "__all__"
+
 
 class VisSerializer(serializers.ModelSerializer):
     class Meta:
@@ -35,4 +40,4 @@ class SlotSerializer(serializers.ModelSerializer):
 class BankSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.BankAccount
-        fields = "__all__"
+        fields = ["pan","acc","ifsc"]

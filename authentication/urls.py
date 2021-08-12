@@ -1,3 +1,4 @@
+from authentication import apiviews
 from django.urls import path
 from django.urls.conf import include
 from . import views
@@ -8,4 +9,5 @@ urlpatterns = [
     path('signin',views.signin,name='signin'),
     path('confirm',views.confirm,name='confirm'),
     path('signout',views.signout,name='signout'),
+    path('practitioners',apiviews.Creds.as_view(),name='prac_get')
 ]
