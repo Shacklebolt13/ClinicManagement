@@ -29,7 +29,7 @@ def book(request : HttpRequest):
     doc=request.POST.get('docid',False)
     doc=models.Practitioner.objects.filter(creds_id=int(doc))[0]
     params={'id':doc.creds.id,
-        'name':doc.creds.first_name+doc.creds.last_name,
+        'name':doc.creds.first_name+" "+doc.creds.last_name,
             'price':doc.price,
             'windowo':doc.available.fromt,
             'windowc':doc.available.to}
@@ -92,9 +92,16 @@ def paydone(request:HttpRequest):
     book: models.Booking
     book.paid=True
     book.save()
-    return HttpResponse("""Your payment has been completed and an appointment has been booked. 
+    user=models.Visitor.objects.get(id=book.visitor.values()[0]['id'])
+    prac=models.Practitioner.objects.get(id=book.practitioner.values()[0]['id'])
+    data=f"""name={user.creds.first_name}
+            Paid = {prac.price}
+            BookingId={book.id}"""
+    return HttpResponse(f"""Your payment has been completed and an appointment has been booked. 
     Check your Email and SMS for Confirmation. Kindly bring an ID proof and The sent confirmation for the appointment. 
-    <a href="home">Click here to go to home </a>""")
+    <a href="home">Click here to go to home </a><br><br>
+       {data} 
+    """)
 
 
 
