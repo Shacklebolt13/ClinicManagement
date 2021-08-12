@@ -10,20 +10,20 @@ Hi, Kindly proceed with the following instructions to install this project.
 # Create a Virtual Env.
 
 ### linux
->python3 -m pip install venv
->python3 -m venv venv
->source venv/bin/activate
+>python3 -m pip install venv <br>
+>python3 -m venv venv <br>
+>source venv/bin/activate <br>
 
 ### windows
->python -m pip install venv
->python -m venv venv
->& source venv/scripts/activate.bat
+>python -m pip install venv <br>
+>python -m venv venv <br>
+>& source venv/scripts/activate.bat <br>
 
 # Install Requirements
 >pip install -r requirements.txt
 
 # Create a SuperUser and Run Server
->python manage.py createsuperuser
+>python manage.py createsuperuser <br>
 >python manage.py runserver
 
 
