@@ -11,6 +11,9 @@ def home(request :HttpRequest):
             user.practitioner
             return redirect('appis')
         except Exception:
-            return redirect('site')
+            if(models.Visitor.objects.get(creds=user).is_verified):
+                return redirect('site')
+            else:
+                return redirect('confirm')
     else:
         return redirect('signin')

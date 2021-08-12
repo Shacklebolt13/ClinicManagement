@@ -20,11 +20,11 @@ def confirm(request :HttpRequest):
     user: models.Visitor
     user=request.COOKIES.get('user',False)
     user=models.Visitor.objects.filter(creds_id=int(user))[0]
-
+    params['error']=""
     if(request.method.upper()!='POST'):
         if(not user.is_verified):
             user.expectedOTP=f"{random.randint(10000,99999)}"
-            params['error']=user.expectedOTP
+            params['error']='Because of lack of an smtp server, I am showing the otp here. OTP IS:'+user.expectedOTP
             user.save()
             helpers.sendotp(user.creds.email,user.expectedOTP)
         else:
@@ -37,7 +37,7 @@ def confirm(request :HttpRequest):
         user.is_verified=True
         user.save()
         return redirect('home')
-    params['error']=user.expectedOTP
+    params['error']='Because of lack of an smtp server, I am showing the otp here. OTP IS:'+user.expectedOTP
     return render(request,'authentication/confirm.html',params)
 
 
@@ -48,7 +48,6 @@ def signin(request :HttpRequest):
         return redirect('home')
 
     if(request.method.upper()!='POST'):
-        print('no post')
         return render(request,'authentication/signin.html',params)
 
     email=request.POST.get('email',False)
@@ -86,12 +85,13 @@ def signup(request: HttpRequest):
     dob=datetime.strptime(dob,'%Y-%m-%d').date()
     user=models.User.objects.create_user(email,email,password)
     user.first_name=uname
+    user.save()
     vis=models.Visitor(creds=user,nationality=nat,gender=gender,dob=dob)
     vis.save()
     add=models.Address(addr1=addr1,addr2=addr2,postal=int(postal),city=city,state=state,country=country,vis=vis)
     add.save()
     
-    resp=redirect('home')
+    resp=redirect('confirm')
     resp.set_cookie(key='user',value=vis.creds.id)
 
     return resp

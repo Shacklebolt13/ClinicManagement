@@ -46,13 +46,15 @@ def seeApps(request:HttpRequest):
     else:
         bookinglist=[]
         for i in bookings:
-            if(i.paid):    
+            if(i['paid']):    
                 booking=i
                 booking['date']=str(booking['date'])
-                i.visitor.values()[0]
+                vis=models.Booking.objects.get(id=i['id']).visitor.values()[0]['id']
+                vis=models.Visitor.objects.get(id=vis)
+                booking['name']=vis.creds.first_name+" "+vis.creds.last_name
                 bookinglist.append(booking)
         params['bookings']=bookinglist
-            
+        print(params)
     return render(request,'fullsite/seeApps.html',params)
 
 

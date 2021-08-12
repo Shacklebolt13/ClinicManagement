@@ -12,7 +12,6 @@
         <div class="navbar-nav">
           <a class="nav-link active" aria-current="page" href="{% url 'signin' %}">Signin</a>
           <a class="nav-link" href="{% url 'signup' %}">Signup</a>
-          <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="false">SuperAdmin</a>
         </div>
       </div>
     </div>
@@ -22,6 +21,9 @@
 
   <center>
   <div class="card" style="margin-top: 15%;width: 20%;background-color: rgba(0, 0, 0, 0.1);"> 
+  <div class="card-title"> 
+  Please Confirm Your EMail Address
+  </div>
     <div class="card-body">   
       <form action='{% url 'confirm'%}' method="POST"> 
       {% csrf_token %}

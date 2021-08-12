@@ -32,12 +32,19 @@
   <center>
   <div class="card" style="margin-top: 15%;width: 20%;background-color: rgba(0, 0, 0, 0.1);"> 
     <div class="card-body">   
-      <table>
+      <table style="width:100%" cellpadding="3">
           <tr>
-              <th></th>
-              <th></th>
-              <th></th>
+              <th>Booking ID</th>
+              <th>Date</th>
+              <th>Visitor Name</th>
           </tr>
+          {% for booking in bookings%}
+          <tr>
+            <td>{{booking.id}}</td>
+            <td>{{booking.date}}</td>
+            <td>{{booking.name}}</td>
+        </tr>
+        {% endfor %}
       </table>
     </div>
   </div>
